@@ -1,0 +1,16 @@
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+.env
+data/
+models/*.h5
+models/*.pkl
+models/*.keras
+*.keras
+*.h5
+mlruns/
+.ipynb_checkpoints/
+*.DS_Store
+Thumbs.db
