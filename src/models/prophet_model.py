@@ -34,7 +34,7 @@ class ProphetForecaster:
         y_col : str
             Name of the value column.
         """
-        from fbprophet import Prophet
+        from prophet import Prophet
 
         prophet_df = df[[ds_col, y_col]].rename(columns={ds_col: "ds", y_col: "y"})
 
