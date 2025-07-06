@@ -1,8 +1,8 @@
 import streamlit as st
 import plotly.express as px
 
-from src.data_loader import load_energy_data, split_by_date
-from src.feature_engineering import DemandFeatures
+from forecaster.data_loader import load_energy_data, split_by_date
+from forecaster.feature_engineering import DemandFeatures
 
 st.set_page_config(page_title="Energy Demand Forecaster", page_icon="⚡", layout="wide")
 st.title("Energy Demand Forecaster")
@@ -74,8 +74,8 @@ with t4:
     st.markdown(
         "To compare models, run the comparison script:\n"
         "```python\n"
-        "from src.comparison import ModelComparison\n"
-        "from src.data_loader import load_energy_data, split_by_date\n\n"
+        "from forecaster.comparison import ModelComparison\n"
+        "from forecaster.data_loader import load_energy_data, split_by_date\n\n"
         "df = load_energy_data('data/energy.csv')\n"
         "train, test = split_by_date(df, test_days=30)\n"
         "comp = ModelComparison()\n"
