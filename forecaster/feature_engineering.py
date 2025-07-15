@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 
 
-# NOTE: revisit after upgrading to sklearn 1.5
+# TODO: revisit after upgrading to sklearn 1.5
 class DemandFeatures:
     """Feature engineering for energy demand time series forecasting.
 
