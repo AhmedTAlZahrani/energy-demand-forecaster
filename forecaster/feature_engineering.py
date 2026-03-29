@@ -1,5 +1,8 @@
+from typing import List, Optional
+
 import numpy as np
 import pandas as pd
+from loguru import logger
 
 
 # TODO: revisit after upgrading to sklearn 1.5
@@ -17,11 +20,11 @@ class DemandFeatures:
         Window sizes in hours for rolling statistics.
     """
 
-    def __init__(self, lags=None, rolling_windows=None):
+    def __init__(self, lags: Optional[List[int]] = None, rolling_windows: Optional[List[int]] = None):
         self.lags = lags or [1, 24, 168]
         self.rolling_windows = rolling_windows or [24, 168]
 
-    def create_lag_features(self, df, column="consumption"):
+    def create_lag_features(self, df: pd.DataFrame, column: str = "consumption") -> pd.DataFrame:
         """Create lag features for the target column.
 
         Parameters
@@ -37,11 +40,12 @@ class DemandFeatures:
             DataFrame with lag columns added.
         """
         df = df.copy()
+        logger.debug("Creating lag features for '{}': lags={}", column, self.lags)
         for lag in self.lags:
             df[f"{column}_lag_{lag}"] = df[column].shift(lag)
         return df
 
-    def create_rolling_features(self, df, column="consumption"):
+    def create_rolling_features(self, df: pd.DataFrame, column: str = "consumption") -> pd.DataFrame:
         """Create rolling mean and standard deviation features.
 
         Parameters
@@ -63,7 +67,7 @@ class DemandFeatures:
         return df
 
     @staticmethod
-    def create_cyclical_features(df):
+    def create_cyclical_features(df: pd.DataFrame) -> pd.DataFrame:
         """Encode hour and day_of_week as sin/cos pairs.
 
         Cyclical encoding preserves the circular nature of time
@@ -91,7 +95,7 @@ class DemandFeatures:
 
         return df
 
-    def build_features(self, df, column="consumption"):
+    def build_features(self, df: pd.DataFrame, column: str = "consumption") -> pd.DataFrame:
         """Apply all feature engineering steps.
 
         Parameters
@@ -106,8 +110,11 @@ class DemandFeatures:
         pandas.DataFrame
             DataFrame with all engineered features, NaN rows dropped.
         """
+        logger.info("Building all features for column '{}' on {} rows", column, len(df))
         df = self.create_lag_features(df, column)
         df = self.create_rolling_features(df, column)
         df = self.create_cyclical_features(df)
+        before = len(df)
         df = df.dropna().reset_index(drop=True)
+        logger.info("Feature engineering complete: {} -> {} rows ({} dropped)", before, len(df), before - len(df))
         return df

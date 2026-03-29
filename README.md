@@ -1,5 +1,7 @@
 # Energy Demand Forecaster
 
+![Unit Tests](https://github.com/AhmedTAlZahrani/energy-demand-forecaster/actions/workflows/tests.yml/badge.svg)
+
 Accurate short-term load forecasting is essential for efficient power grid
 operation and economic dispatch. This project implements and evaluates three
 complementary approaches to hourly electricity demand prediction: a classical
