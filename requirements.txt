@@ -7,4 +7,5 @@ plotly>=5.15,<5.24
 streamlit>=1.25,<1.40
 scikit-learn>=1.2,<1.5
 matplotlib>=3.7,<3.10
+loguru>=0.7,<0.8
 

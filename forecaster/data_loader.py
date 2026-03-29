@@ -1,8 +1,10 @@
+from typing import Tuple
+
 import pandas as pd
 import numpy as np
 
 
-def load_energy_data(path="data/energy.csv", datetime_col="Datetime", value_col="AEP_MW"):
+def load_energy_data(path: str = "data/energy.csv", datetime_col: str = "Datetime", value_col: str = "AEP_MW") -> pd.DataFrame:
     """Load and prepare hourly energy consumption data.
 
     Parses timestamps, sorts chronologically, handles missing values
@@ -52,7 +54,7 @@ def load_energy_data(path="data/energy.csv", datetime_col="Datetime", value_col=
     return df
 
 
-def split_by_date(df, test_days=30):
+def split_by_date(df: pd.DataFrame, test_days: int = 30) -> Tuple[pd.DataFrame, pd.DataFrame]:
     """Split data chronologically into train and test sets.
 
     Parameters
