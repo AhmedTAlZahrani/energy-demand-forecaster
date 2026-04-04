@@ -32,12 +32,17 @@ trained using Adam on MSE loss with early stopping on validation loss
 
 ## Results
 
-On a 30-day holdout test set, the LSTM achieved the lowest error with an RMSE
-of 298.5 MW and MAPE of 3.2%, followed by Prophet (RMSE 356.1, MAPE 4.6%)
-and ARIMA (RMSE 412.3, MAPE 5.8%). The LSTM benefits from its ability to
-capture nonlinear temporal dependencies, while Prophet provides better
-interpretability through its component decomposition. ARIMA remains
-competitive for shorter forecast horizons.
+30-day holdout test set:
+
+| Model | RMSE (MW) | MAPE |
+|-------|-----------|------|
+| ARIMA | 412.3 | 5.8% |
+| Prophet | 356.1 | 4.6% |
+| **LSTM** | **298.5** | **3.2%** |
+
+The LSTM benefits from its ability to capture nonlinear temporal dependencies,
+while Prophet provides better interpretability through its component
+decomposition. ARIMA remains competitive for shorter forecast horizons.
 
 ## Quick Start
 
